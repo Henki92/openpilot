@@ -67,6 +67,7 @@ class RadarInterface(RadarInterfaceBase):
     errors = []
     if not self.rcp.can_valid:
       errors.append("canError")
+    errors = []
     ret.errors = errors
 
     for ii in sorted(updated_messages):
