@@ -48,7 +48,7 @@ class CarInterface(CarInterfaceBase):
 
     ret = self.CS.update(self.cp, self.cp_cam)
     ret.canValid = self.cp.can_valid and self.cp_cam.can_valid
-    print("CanValid: " + ret.canValid + ", cp.can_valid: " + self.cp.can_valid + ", cp_cam.can_valid: " + self.cp_cam.can_valid)
+    print("CanValid: " + str(ret.canValid) + ", cp.can_valid: " + str(self.cp.can_valid) + ", cp_cam.can_valid: " + str(self.cp_cam.can_valid))
 
     events = self.create_common_events(ret)
 
