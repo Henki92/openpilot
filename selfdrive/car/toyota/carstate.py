@@ -188,7 +188,6 @@ class CarState(CarStateBase):
       checks += [
         ("BSM", 1)
       ]
-    checks = []
 
     return CANParser(DBC[CP.carFingerprint]["pt"], signals, checks, 0)
 
@@ -211,6 +210,5 @@ class CarState(CarStateBase):
       checks.append(("ACC_CONTROL", 33))
 
   
-    checks = []
 
     return CANParser(DBC[CP.carFingerprint]["pt"], signals, checks, 2)
