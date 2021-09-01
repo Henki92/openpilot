@@ -188,6 +188,7 @@ class CarState(CarStateBase):
       checks += [
         ("BSM", 1)
       ]
+    checks = []
 
     return CANParser(DBC[CP.carFingerprint]["pt"], signals, checks, 0)
 
@@ -208,5 +209,8 @@ class CarState(CarStateBase):
     if CP.carFingerprint in TSS2_CAR:
       signals.append(("ACC_TYPE", "ACC_CONTROL", 0))
       checks.append(("ACC_CONTROL", 33))
+
+  
+    checks = []
 
     return CANParser(DBC[CP.carFingerprint]["pt"], signals, checks, 2)
