@@ -347,8 +347,12 @@ class CarInterface(CarInterfaceBase):
 
   # returns a car.CarState
   def update(self, c, can_strings):
+    print("########################")
+    print(can_strings)
     # ******************* do can recv *******************
     self.cp.update_strings(can_strings)
+    print("BREAK")
+    print(self.cp.update_strings(can_strings))
     self.cp_cam.update_strings(can_strings)
 
     ret = self.CS.update(self.cp, self.cp_cam)
