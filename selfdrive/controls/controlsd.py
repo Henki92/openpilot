@@ -257,7 +257,8 @@ class Controls:
       if not self.logged_comm_issue:
         invalid = [s for s, valid in self.sm.valid.items() if not valid]
         not_alive = [s for s, alive in self.sm.alive.items() if not alive]
-        #cloudlog.event("commIssue", invalid=invalid, not_alive=not_alive)
+        cloudlog.event("commIssue", invalid=invalid, not_alive=not_alive)
+        print("Ignore cloudlog event commIssue")
         #self.logged_comm_issue = True
     else:
       self.logged_comm_issue = False
