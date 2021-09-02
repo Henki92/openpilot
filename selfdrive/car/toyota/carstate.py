@@ -25,14 +25,15 @@ class CarState(CarStateBase):
 
   def update(self, cp, cp_cam):
     ret = car.CarState.new_message()
-    print("#################START OF DEBUG##########\n")
     ret.doorOpen = any([cp.vl["SEATS_DOORS"]["DOOR_OPEN_FL"], cp.vl["SEATS_DOORS"]["DOOR_OPEN_FR"],
                         cp.vl["SEATS_DOORS"]["DOOR_OPEN_RL"], cp.vl["SEATS_DOORS"]["DOOR_OPEN_RR"]])
     ret.seatbeltUnlatched = cp.vl["SEATS_DOORS"]["SEATBELT_DRIVER_UNLATCHED"] != 0
 
     ret.brakePressed = cp.vl["BRAKE_MODULE"]["BRAKE_PRESSED"] != 0
-    print("Brake pressed: ", cp.vl["BRAKE_MODULE"]["BRAKE_PRESSED"], "\n")
-    print("Brake pressed: ", ret.brakePressed, "\n")
+    if (ret.brakePressed):
+      print("#########################")
+      print("Brake pressed")
+      
     if self.CP.enableGasInterceptor:
       #print("Hello1")
       ret.gas = (cp.vl["GAS_SENSOR"]["INTERCEPTOR_GAS"] + cp.vl["GAS_SENSOR"]["INTERCEPTOR_GAS2"]) / 2.
