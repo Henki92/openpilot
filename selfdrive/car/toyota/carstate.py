@@ -33,7 +33,7 @@ class CarState(CarStateBase):
     if (ret.brakePressed):
       print("#########################")
       print("Brake pressed")
-
+      
     if self.CP.enableGasInterceptor:
       #print("Hello1")
       ret.gas = (cp.vl["GAS_SENSOR"]["INTERCEPTOR_GAS"] + cp.vl["GAS_SENSOR"]["INTERCEPTOR_GAS2"]) / 2.
@@ -159,7 +159,7 @@ class CarState(CarStateBase):
       ("SEATS_DOORS", 3),
       ("ESP_CONTROL", 3),
       ("EPS_STATUS", 25),
-      ("BRAKE_MODULE", 0),
+      ("BRAKE_MODULE", 40),
       ("GAS_PEDAL", 33),
       ("WHEEL_SPEEDS", 80),
       ("STEER_ANGLE_SENSOR", 80),
