@@ -32,7 +32,6 @@ class CarState(CarStateBase):
 
     ret.brakePressed = cp.vl["BRAKE_MODULE"]["BRAKE_PRESSED"] != 0
 
-    print("cp.vl: ", cp.vl, "\n")
     print("Brake pressed: ", ret.brakePressed, "\n")
     if self.CP.enableGasInterceptor:
       #print("Hello1")
