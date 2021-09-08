@@ -42,7 +42,7 @@ class CarController():
              left_line, right_line, lead, left_lane_depart, right_lane_depart):
 
     # *** compute control surfaces ***
-
+    print("Entered carcontroller update")
     # gas and brake
     interceptor_gas_cmd = 0.
     pcm_accel_cmd = actuators.gas - actuators.brake
@@ -76,6 +76,7 @@ class CarController():
       apply_steer_req = 1
 
     if not enabled and CS.pcm_acc_status:
+      print("Why PCM cancel?", enabled, CS.pcm_acc_status)
       # send pcm acc cancel cmd if drive is disabled but pcm is still on, or if the system can't be activated
       pcm_cancel_cmd = 1
 
@@ -98,8 +99,8 @@ class CarController():
     # toyota can trace shows this message at 42Hz, with counter adding alternatively 1 and 2;
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
+    print("Steer command: ", self.packer, apply_steer, apply_steer_req, frame)
     can_sends.append(create_steer_command(self.packer, apply_steer, apply_steer_req, frame))
-    print("Sending steer command: ", apply_steer, apply_steer_req, frame)
     if frame % 2 == 0 and CS.CP.carFingerprint in TSS2_CAR:
       can_sends.append(create_lta_steer_command(self.packer, 0, 0, frame // 2))
 
@@ -116,10 +117,10 @@ class CarController():
       if pcm_cancel_cmd and CS.CP.carFingerprint == CAR.LEXUS_IS:
         can_sends.append(create_acc_cancel_command(self.packer))
       elif CS.CP.openpilotLongitudinalControl:
-        print("If 1 accel_command", pcm_accel_cmd, pcm_cancel_cmd, self.standstill_req, lead, CS.acc_type)
+        print("LongControl IF1: ", self.packer, pcm_accel_cmd, pcm_cancel_cmd, self.standstill_req, lead, CS.acc_type)
         can_sends.append(create_accel_command(self.packer, pcm_accel_cmd, pcm_cancel_cmd, self.standstill_req, lead, CS.acc_type))
       else:
-        print("If 2 accel_command", pcm_cancel_cmd, lead, CS.acc_type)
+        print("LongControl IF2: ", self.packer, 0, pcm_cancel_cmd, False, lead, CS.acc_type)
         can_sends.append(create_accel_command(self.packer, 0, pcm_cancel_cmd, False, lead, CS.acc_type))
 
     if frame % 2 == 0 and CS.CP.enableGasInterceptor:
