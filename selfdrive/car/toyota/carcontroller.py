@@ -99,7 +99,7 @@ class CarController():
     # toyota can trace shows this message at 42Hz, with counter adding alternatively 1 and 2;
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
-    print("Steer command: ", self.packer, apply_steer, apply_steer_req, frame)
+    print("Steer command: ", apply_steer, apply_steer_req, frame)
     can_sends.append(create_steer_command(self.packer, apply_steer, apply_steer_req, frame))
     if frame % 2 == 0 and CS.CP.carFingerprint in TSS2_CAR:
       can_sends.append(create_lta_steer_command(self.packer, 0, 0, frame // 2))
@@ -117,10 +117,10 @@ class CarController():
       if pcm_cancel_cmd and CS.CP.carFingerprint == CAR.LEXUS_IS:
         can_sends.append(create_acc_cancel_command(self.packer))
       elif CS.CP.openpilotLongitudinalControl:
-        print("LongControl IF1: ", self.packer, pcm_accel_cmd, pcm_cancel_cmd, self.standstill_req, lead, CS.acc_type)
+        print("LongControl IF1: ", pcm_accel_cmd, pcm_cancel_cmd, self.standstill_req, lead, CS.acc_type)
         can_sends.append(create_accel_command(self.packer, pcm_accel_cmd, pcm_cancel_cmd, self.standstill_req, lead, CS.acc_type))
       else:
-        print("LongControl IF2: ", self.packer, 0, pcm_cancel_cmd, False, lead, CS.acc_type)
+        print("LongControl IF2: ", 0, pcm_cancel_cmd, False, lead, CS.acc_type)
         can_sends.append(create_accel_command(self.packer, 0, pcm_cancel_cmd, False, lead, CS.acc_type))
 
     if frame % 2 == 0 and CS.CP.enableGasInterceptor:
