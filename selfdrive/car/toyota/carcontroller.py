@@ -99,7 +99,7 @@ class CarController():
     # toyota can trace shows this message at 42Hz, with counter adding alternatively 1 and 2;
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
-    can_sends.append(create_steer_command(self.packer, int(round(actuators.steeringAngleDeg*50.0)), apply_steer_req, frame))
+    can_sends.append(create_steer_command(self.packer, int(round(actuators.steeringAngleDeg*10000.0)), apply_steer_req, frame))
     can_sends.append(create_lta_steer_command(self.packer, actuators.steeringAngleDeg, apply_steer_req, frame // 2))
 
     if frame % 2 == 0 and CS.CP.carFingerprint in TSS2_CAR:
