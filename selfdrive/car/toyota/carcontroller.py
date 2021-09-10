@@ -100,7 +100,7 @@ class CarController():
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
     can_sends.append(create_steer_command(self.packer, int(round(actuators.steeringAngleDeg*10000.0)), apply_steer_req, frame))
-    can_sends.append(create_lta_steer_command(self.packer, actuators.steeringAngleDeg, apply_steer_req, frame // 2))
+    #can_sends.append(create_lta_steer_command(self.packer, actuators.steeringAngleDeg, apply_steer_req, frame // 2))
 
     if frame % 2 == 0 and CS.CP.carFingerprint in TSS2_CAR:
       can_sends.append(create_lta_steer_command(self.packer, 0, 0, frame // 2))
