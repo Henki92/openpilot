@@ -65,7 +65,8 @@ class CarState(CarStateBase):
           self.angle_offset = ret.steeringAngleDeg - angle_wheel
     else:
       ret.steeringAngleDeg = cp.vl["STEER_ANGLE_SENSOR"]["STEER_ANGLE"] + cp.vl["STEER_ANGLE_SENSOR"]["STEER_FRACTION"]
-
+    
+    print("SteeringAngleDeg: ", ret.steeringAngleDeg)
     ret.steeringRateDeg = cp.vl["STEER_ANGLE_SENSOR"]["STEER_RATE"]
 
     can_gear = int(cp.vl["GEAR_PACKET"]["GEAR"])
