@@ -100,7 +100,7 @@ class CarController():
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
     print("SteeringAngleDeg = ", actuators.steeringAngleDeg)
-    print("With round and int conversion: ", int(round(actuators.steeringAngleDeg*1000.0))
+    print("With round and int conversion: ", int(round(actuators.steeringAngleDeg*1000.0)))
     can_sends.append(create_steer_command(self.packer, int(round(actuators.steeringAngleDeg*1000.0)), apply_steer_req, frame))
     #can_sends.append(create_lta_steer_command(self.packer, actuators.steeringAngleDeg, apply_steer_req, frame // 2))
 
