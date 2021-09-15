@@ -51,10 +51,10 @@ class CarInterface(CarInterfaceBase):
     elif candidate in [CAR.RAV4, CAR.RAV4H]:
       stop_and_go = True # if (candidate in CAR.RAV4H) else False
       ret.safetyParam = 73
-      ret.wheelbase = 2.65
+      ret.wheelbase = 2.99
       ret.steerRatio = 16.88   # 14.5 is spec end-to-end
       tire_stiffness_factor = 0.5533
-      ret.mass = 3650. * CV.LB_TO_KG + STD_CARGO_KG  # mean between normal and hybrid
+      ret.mass = 2500.  # mean between normal and hybrid
       ret.steerControlType = car.CarParams.SteerControlType.angle
 
       # ret.lateralTuning.init('lqr')
