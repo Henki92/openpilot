@@ -100,9 +100,8 @@ class CarController():
     # sending it at 100Hz seem to allow a higher rate limit, as the rate limit seems imposed
     # on consecutive messages
     print("SteeringAngleDeg = ", actuators.steeringAngleDeg)
-    print("With round and int conversion: ", int(round(actuators.steeringAngleDeg*1000.0)))
-    can_sends.append(create_steer_command(self.packer, int(round(actuators.steeringAngleDeg*1000.0)), apply_steer_req, frame))
-    #can_sends.append(create_lta_steer_command(self.packer, actuators.steeringAngleDeg, apply_steer_req, frame // 2))
+    can_sends.append(create_steer_command(self.packer, 0, 0, frame // 2))
+    can_sends.append(create_lta_steer_command(self.packer, actuators.steeringAngleDeg, apply_steer_req, frame))
 
     if frame % 2 == 0 and CS.CP.carFingerprint in TSS2_CAR:
       can_sends.append(create_lta_steer_command(self.packer, 0, 0, frame // 2))
@@ -110,7 +109,7 @@ class CarController():
     # LTA mode. Set ret.steerControlType = car.CarParams.SteerControlType.angle and whitelist 0x191 in the panda
     # if frame % 2 == 0:
     #   can_sends.append(create_steer_command(self.packer, 0, 0, frame // 2))
-    
+
     # we can spam can to cancel the system even if we are using lat only control
     if (frame % 3 == 0 and CS.CP.openpilotLongitudinalControl) or pcm_cancel_cmd:
       lead = lead or CS.out.vEgo < 12.    # at low speed we always assume the lead is present do ACC can be engaged
