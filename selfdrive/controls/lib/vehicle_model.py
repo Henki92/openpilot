@@ -42,6 +42,7 @@ class VehicleModel:
     self.cF = stiffness_factor * self.cF_orig
     self.cR = stiffness_factor * self.cR_orig
     self.sR = steer_ratio
+    print("Stiffness_factor (Dyn VehicleModel): ", stiffness_factor)
 
   def steady_state_sol(self, sa: float, u: float) -> np.ndarray:
     """Returns the steady state solution.
