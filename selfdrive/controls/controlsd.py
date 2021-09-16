@@ -241,7 +241,6 @@ class Controls:
       #self.events.add(EventName.canError)
 
     safety_mismatch = self.sm['pandaState'].safetyModel != self.CP.safetyModel or self.sm['pandaState'].safetyParam != self.CP.safetyParam
-    print("Safety mismatch: ", self.sm['pandaState'].safetyModel, self.CP.safetyModel, self.sm['pandaState'].safetyParam, self.CP.safetyParam)
     if safety_mismatch or self.mismatch_counter >= 200:
       self.events.add(EventName.controlsMismatch)
 
@@ -249,7 +248,6 @@ class Controls:
       self.events.add(EventName.vehicleModelInvalid)
 
     if len(self.sm['radarState'].radarErrors):
-      print("Hellohello")
       #self.events.add(EventName.radarFault)
     elif not self.sm.valid["pandaState"]:
       self.events.add(EventName.usbError)
@@ -494,6 +492,7 @@ class Controls:
 
     if angle_control_saturated and not CS.steeringPressed and self.active:
       self.saturated_count += 1
+      print("Saturation warning: ", actuators.steeringAngleDeg, " : ", CS.steeringAngleDeg, "\n")
     else:
       self.saturated_count = 0
 

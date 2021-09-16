@@ -33,7 +33,7 @@ class CarState(CarStateBase):
     if (ret.brakePressed):
       print("#########################")
       print("Brake pressed")
-      
+
     if self.CP.enableGasInterceptor:
       #print("Hello1")
       ret.gas = (cp.vl["GAS_SENSOR"]["INTERCEPTOR_GAS"] + cp.vl["GAS_SENSOR"]["INTERCEPTOR_GAS2"]) / 2.
@@ -65,8 +65,8 @@ class CarState(CarStateBase):
           self.angle_offset = ret.steeringAngleDeg - angle_wheel
     else:
       ret.steeringAngleDeg = cp.vl["STEER_ANGLE_SENSOR"]["STEER_ANGLE"] + cp.vl["STEER_ANGLE_SENSOR"]["STEER_FRACTION"]
-    
-    print("SteeringAngleDeg: ", ret.steeringAngleDeg)
+
+    print("SteeringAngleDeg (CarState): ", ret.steeringAngleDeg)
     ret.steeringRateDeg = cp.vl["STEER_ANGLE_SENSOR"]["STEER_RATE"]
 
     can_gear = int(cp.vl["GEAR_PACKET"]["GEAR"])
@@ -215,6 +215,6 @@ class CarState(CarStateBase):
       signals.append(("ACC_TYPE", "ACC_CONTROL", 0))
       checks.append(("ACC_CONTROL", 33))
 
-  
+
 
     return CANParser(DBC[CP.carFingerprint]["pt"], signals, checks, 2)

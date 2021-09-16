@@ -56,6 +56,7 @@ class CarInterface(CarInterfaceBase):
       tire_stiffness_factor = 0.5533
       ret.mass = 2500.  # mean between normal and hybrid
       ret.steerControlType = car.CarParams.SteerControlType.angle
+      ret.steerActuatorDelay = 0.05
 
       # ret.lateralTuning.init('lqr')
 #
@@ -288,16 +289,16 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kf = 0.00007818594
 
     ret.steerRateCost = 1.
-    ret.centerToFront = ret.wheelbase * 0.44
+    ret.centerToFront = ret.wheelbase * 0.474
 
     # TODO: get actual value, for now starting with reasonable value for
     # civic and scaling by mass and wheelbase
-    ret.rotationalInertia = scale_rot_inertia(ret.mass, ret.wheelbase)
+    ret.rotationalInertia = 5219 #scale_rot_inertia(ret.mass, ret.wheelbase)
 
     # TODO: start from empirically derived lateral slip stiffness for the civic and scale by
     # mass and CG position, so all cars will have approximately similar dyn behaviors
-    ret.tireStiffnessFront, ret.tireStiffnessRear = scale_tire_stiffness(ret.mass, ret.wheelbase, ret.centerToFront,
-                                                                         tire_stiffness_factor=tire_stiffness_factor)
+    ret.tireStiffnessFront, ret.tireStiffnessRear = 250000, 250000 #scale_tire_stiffness(ret.mass, ret.wheelbase, ret.centerToFront,
+    #                                                                     tire_stiffness_factor=tire_stiffness_factor)
 
     ret.enableBsm = 0x3F6 in fingerprint[0] and candidate in TSS2_CAR
     # Detect smartDSU, which intercepts ACC_CMD from the DSU allowing openpilot to send it
