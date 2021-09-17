@@ -1,5 +1,6 @@
 from cereal import car
 from common.numpy_fast import clip
+from common.params import Params
 from selfdrive.car import apply_toyota_steer_torque_limits, create_gas_command, make_can_msg
 from selfdrive.car.toyota.toyotacan import create_steer_command, create_ui_command, \
                                            create_accel_command, create_acc_cancel_command, \
@@ -35,6 +36,7 @@ class CarController():
     self.standstill_req = False
     self.steer_rate_limited = False
     self.use_interceptor = False
+    self.params = Params()
 
     self.packer = CANPacker(dbc_name)
 
@@ -147,6 +149,9 @@ class CarController():
 
     if frame % 100 == 0 and CS.CP.enableDsu:
       can_sends.append(create_fcw_command(self.packer, fcw_alert))
+
+    print("LastGPSPosition (CarController): ", self.params.get('LastGPSPosition'))
+    # can_sends.append(create_pose_command(self.packer, pos_x, pos_y, heading))
 
     #*** static msgs ***
 

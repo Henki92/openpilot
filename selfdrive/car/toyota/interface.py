@@ -51,8 +51,8 @@ class CarInterface(CarInterfaceBase):
     elif candidate in [CAR.RAV4, CAR.RAV4H]:
       stop_and_go = True # if (candidate in CAR.RAV4H) else False
       ret.safetyParam = 73
-      ret.wheelbase = 2.99
-      ret.steerRatio = 16.88   # 14.5 is spec end-to-end
+      ret.wheelbase = 2.985
+      ret.steerRatio = 16.7   # 14.5 is spec end-to-end
       tire_stiffness_factor = 0.5533
       ret.mass = 2500.  # mean between normal and hybrid
       ret.steerControlType = car.CarParams.SteerControlType.angle
@@ -297,7 +297,7 @@ class CarInterface(CarInterfaceBase):
 
     # TODO: start from empirically derived lateral slip stiffness for the civic and scale by
     # mass and CG position, so all cars will have approximately similar dyn behaviors
-    ret.tireStiffnessFront, ret.tireStiffnessRear = 250000, 250000 #scale_tire_stiffness(ret.mass, ret.wheelbase, ret.centerToFront,
+    ret.tireStiffnessFront, ret.tireStiffnessRear = 225000, 225000 #scale_tire_stiffness(ret.mass, ret.wheelbase, ret.centerToFront,
     #                                                                     tire_stiffness_factor=tire_stiffness_factor)
 
     ret.enableBsm = 0x3F6 in fingerprint[0] and candidate in TSS2_CAR
